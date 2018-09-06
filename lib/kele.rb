@@ -1,8 +1,10 @@
 require 'httparty'
 require 'json'
+require './lib/roadmap'
 
 class Kele
   include HTTParty
+  require Roadmap
 
   # Creates a new Kele client authorized with a username and password
   # Params: username = string, password = string
@@ -34,19 +36,20 @@ class Kele
 
   #Retrieve the availability of the current user’s mentor
   def get_mentor_availability(mentor_id)
-  # Point the HTTParty GET method at the mentors/mentor_id/student_availability endpoint of Bloc’s API.
-  # Use HTTParty’s header option to pass the auth_token.
-  response = self.class.get(“/mentors/#{mentor_id}/student_availability”, headers: { “authorization” => @auth_token })
-  # This is the array that will hold all of the time slots that are not booked.
-  available = []
-  # Parse the JSON document returned in the response into a Ruby hash.
-  # Loop through each of the mentor’s time slots. If the booked attribute is null, or the time slot is available, add that time slot to the available array.
-  JSON.parse(response.body).each do |time_slot|
-    if time_slot[“booked”].nil?
-     available << time_slot
+    # Point the HTTParty GET method at the mentors/mentor_id/student_availability endpoint of Bloc’s API.
+    # Use HTTParty’s header option to pass the auth_token.
+    response = self.class.get('/mentors/#{mentor_id}/student_availability', headers: { “authorization” => @auth_token })
+    # This is the array that will hold all of the time slots that are not booked.
+    available = []
+    # Parse the JSON document returned in the response into a Ruby hash.
+    # Loop through each of the mentor’s time slots. If the booked attribute is null, or the time slot is available, add that time slot to the available array.
+    JSON.parse(response.body).each do |time_slot|
+      if time_slot[“booked”].nil?
+       available << time_slot
+      end
     end
+    # Return all of the available time slots.
+    available
   end
-  # Return all of the available time slots.
-  available
-end
+
 end
