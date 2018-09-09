@@ -6,7 +6,12 @@ module Messages
       # Point the HTTParty POST method at the messages endpoint of Bloc’s API.
       # Use HTTParty’s headers option to pass auth_token to the request to properly authenticate against the Bloc API.
       # Use the HTTParty’s body option to pass all of the attributes to the request (sender, recipient_id, token, subject, stripped-text)
+<<<<<<< HEAD
       response = self.class.post(api_url("messages"), headers: { “authorization” => @auth_token },
+=======
+      response = self.class.post(api_url("messages"),
+      headers: { “authorization” => @auth_token },
+>>>>>>> 2-Rails-retrieve-users
       body:{
         "sender" => sender,
         "recipient_id" => recipient_id,

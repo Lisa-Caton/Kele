@@ -15,17 +15,22 @@ class Kele
     # Bloc's API URL
     # Params: endpoint = string
     def api_url(endpoint)
+<<<<<<< HEAD
       "https://www.bloc.io/api/v1/#{endpoint}"
+=======
+      'https://www.bloc.io/api/v1/#{endpoint}'
+>>>>>>> 2-Rails-retrieve-users
     end
 
     # Use the httparty class method .post to send a post request to the sessions endpoint of Bloc’s API with the email and password in the body of the request.
-    response = self.class.post(api_url("sessions"), body: {"email": email, "password": password})
+    response = self.class.post(api_url('sessions'),
+    body: {'email': email, 'password': password})
 
     # The @auth_token instance variable holds the authorization token provided by Bloc's API upon verifying successful username and password.
-    @auth_token = response["auth_token"]
+    @auth_token = response['auth_token']
 
     # If the username and password are invalid, Bloc's API will not return an authorization token.
-    puts "There was a problem authorizing those credentials. Please try again." if @auth_token.nil?
+    puts 'There was a problem authorizing those credentials. Please try again.' if @auth_token.nil?
   end
 
 
@@ -33,16 +38,23 @@ class Kele
   # Params: auth_token = string
   # Use the httparty class method .get to pass the auth_token to Bloc's API with httparty's header option.
   def get_me
-    response = self.class.get(url, headers: { "authorization" => @auth_token })
+    response = self.class.get(api_url('users/me'),
+    headers: { 'authorization' => @auth_token })
+
     # Parse the JSON document returned in the response into a Ruby hash
-    JSON.parse(body.response)
+     JSON.parse(response.body)
   end
 
   #Retrieve the availability of the current user’s mentor
   def get_mentor_availability(mentor_id)
     # Point the HTTParty GET method at the mentors/mentor_id/student_availability endpoint of Bloc’s API.
     # Use HTTParty’s header option to pass the auth_token.
+<<<<<<< HEAD
     response = self.class.get('/mentors/#{mentor_id}/student_availability', headers: { “authorization” => @auth_token })
+=======
+    response = self.class.get('/mentors/#{mentor_id}/student_availability',
+    headers: { “authorization” => @auth_token })
+>>>>>>> 2-Rails-retrieve-users
     # This is the array that will hold all of the time slots that are not booked.
     available = []
     # Parse the JSON document returned in the response into a Ruby hash.
