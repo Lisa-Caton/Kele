@@ -15,11 +15,7 @@ class Kele
     # Bloc's API URL
     # Params: endpoint = string
     def api_url(endpoint)
-<<<<<<< HEAD
-      "https://www.bloc.io/api/v1/#{endpoint}"
-=======
       'https://www.bloc.io/api/v1/#{endpoint}'
->>>>>>> 2-Rails-retrieve-users
     end
 
     # Use the httparty class method .post to send a post request to the sessions endpoint of Bloc’s API with the email and password in the body of the request.
