@@ -37,7 +37,7 @@ class Kele
     headers: { "authorization" => @auth_token })
 
     # Parse the JSON document returned in the response into a Ruby hash
-    JSON.parse(body.response)
+    JSON.parse(response.body)
   end
 
   #Retrieve the availability of the current user’s mentor
