@@ -45,12 +45,10 @@ class Kele
   def get_mentor_availability(mentor_id)
     # Point the HTTParty GET method at the mentors/mentor_id/student_availability endpoint of Bloc’s API.
     # Use HTTParty’s header option to pass the auth_token.
-<<<<<<< HEAD
-    response = self.class.get('/mentors/#{mentor_id}/student_availability', headers: { “authorization” => @auth_token })
-=======
+
     response = self.class.get('/mentors/#{mentor_id}/student_availability',
     headers: { “authorization” => @auth_token })
->>>>>>> 2-Rails-retrieve-users
+    
     # This is the array that will hold all of the time slots that are not booked.
     available = []
     # Parse the JSON document returned in the response into a Ruby hash.
