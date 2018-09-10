@@ -44,18 +44,10 @@ class Kele
   def get_mentor_availability(mentor_id)
     # Point the HTTParty GET method at the mentors/mentor_id/student_availability endpoint of Bloc’s API.
     # Use HTTParty’s header option to pass the auth_token.
-    response = self.class.get("/mentors/#{mentor_id}/student_availability", headers: { "authorization" => @auth_token })
+    response = self.class.get(api_url("mentors/#{mentor_id}/student_availability"), headers: { "authorization" => @auth_token })
     # This is the array that will hold all of the time slots that are not booked.
-    available = []
-    # Parse the JSON document returned in the response into a Ruby hash.
-    # Loop through each of the mentor’s time slots. If the booked attribute is null, or the time slot is available, add that time slot to the available array.
-    JSON.parse(response.body).each do |time_slot|
-      if time_slot["booked"].nil?
-       available << time_slot
-      end
-    end
-    # Return all of the available time slots.
-    available
-  end
 
+    # Parse the JSON document returned in the response into a Ruby hash
+    JSON.parse(response.body)
+    end
 end
